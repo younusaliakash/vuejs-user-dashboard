@@ -1,4 +1,4 @@
-import {ref, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import authStore from '../stores/authStore';
 
@@ -29,58 +29,58 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('../layouts/Master.vue'),
-      meta:{
+      meta: {
         requiresAuth: true,
       },
-      children:[
-        {
-          path: '',
-          name: 'dashboard',
-          component: () => import('../views/Dashboard.vue')
-        },
+      children: [
+        // {
+        //   path: '',
+        //   name: 'dashboard',
+        //   component: () => import('../views/Dashboard.vue')
+        // },
         {
           path: 'product',
-          children:[
+          children: [
             {
-              path:'',
+              path: '',
               name: 'product',
               component: () => import('../views/product/List.vue')
             },
             {
-              path:'create',
+              path: 'create',
               name: 'product-create',
               component: () => import('../views/product/Create.vue')
             },
             {
-              path:':id/details',
+              path: ':id/details',
               name: 'product-details',
               component: () => import('../views/product/Details.vue')
             },
             {
-              path:':id/edit',
+              path: ':id/edit',
               name: 'product-edit',
               component: () => import('../views/product/Edit.vue')
             },
             {
               path: 'category',
-              children:[
+              children: [
                 {
-                  path:'',
+                  path: '',
                   name: 'product-category',
                   component: () => import('../views/product/List.vue')
                 },
                 {
-                  path:'create',
+                  path: 'create',
                   name: 'product-category-create',
                   component: () => import('../views/product/Create.vue')
                 },
                 {
-                  path:':id/details',
+                  path: ':id/details',
                   name: 'product-category-details',
                   component: () => import('../views/product/Details.vue')
                 },
                 {
-                  path:':id/edit',
+                  path: ':id/edit',
                   name: 'product-category-edit',
                   component: () => import('../views/product/Edit.vue')
                 }
@@ -88,24 +88,24 @@ const router = createRouter({
             },
             {
               path: 'brand',
-              children:[
+              children: [
                 {
-                  path:'',
+                  path: '',
                   name: 'brand',
                   component: () => import('../views/product/List.vue')
                 },
                 {
-                  path:'create',
+                  path: 'create',
                   name: 'product-brand-create',
                   component: () => import('../views/product/Create.vue')
                 },
                 {
-                  path:':id/details',
+                  path: ':id/details',
                   name: 'product-brand-details',
                   component: () => import('../views/product/Details.vue')
                 },
                 {
-                  path:':id/edit',
+                  path: ':id/edit',
                   name: 'product-brand-edit',
                   component: () => import('../views/product/Edit.vue')
                 }
@@ -114,8 +114,8 @@ const router = createRouter({
           ]
         },
         {
-          path: 'profile',
-          name: 'profile',
+          path: '',
+          name: '',
           component: () => import('../views/user/Profile.vue')
         },
         {
@@ -131,7 +131,7 @@ const router = createRouter({
         {
           path: 'report',
           name: 'report',
-          children:[
+          children: [
             {
               path: 'monthly-sales',
               name: 'monthly-sales',
@@ -161,8 +161,8 @@ const router = createRouter({
         },
       ],
     },
-    
-    
+
+
   ]
 });
 
@@ -171,9 +171,9 @@ router.beforeEach((to, from, next) => {
 
   auth.isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
 
-  if(to.meta.requiresAuth && auth.isAuthenticated != true){
+  if (to.meta.requiresAuth && auth.isAuthenticated != true) {
     next('/login');
-  }else{
+  } else {
     // auth.authenticatedUser = JSON.parse(localStorage.getItem('authenticatedUser'));
     next();
   }
